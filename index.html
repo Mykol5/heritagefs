@@ -136,6 +136,13 @@
             box-shadow: 0 12px 20px -8px rgba(28,30,33,0.08);
             transform: translateY(-4px);
         }
+        /* full width nav fix */
+        nav {
+            width: 100% !important;
+            max-width: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
+        }
         @media (min-width: 768px) {
             .nav-desktop {
                 display: flex !important;
@@ -146,13 +153,21 @@
                 display: none !important;
             }
         }
+        /* gallery horizontal scrollbar hide for swipe, but preserve functionality */
+        .gallery-horizontal {
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE 10+ */
+        }
+        .gallery-horizontal::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
     </style>
 </head>
 <body class="bg-ethereal-white text-on-surface font-body-md overflow-x-hidden antialiased">
 
-<!-- Navigation (Web optimized) -->
-<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto bg-ethereal-white/95 backdrop-blur-md shadow-sm border-b border-outline-variant/20" id="navbar">
-    <!-- Logo / Brand with placeholder -->
+<!-- Navigation full width fix -->
+<nav class="fixed top-0 left-0 w-screen z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 mx-auto bg-ethereal-white/95 backdrop-blur-md shadow-sm border-b border-outline-variant/20" id="navbar">
     <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-full bg-heritage-gold/20 flex items-center justify-center border border-heritage-gold/40">
             <span class="material-symbols-outlined text-heritage-gold text-2xl" style="font-variation-settings: 'FILL' 1;">spa</span>
@@ -160,7 +175,6 @@
         <span class="font-title-md text-title-md text-deep-charcoal tracking-tight hidden sm:block">Heritage</span>
     </div>
     
-    <!-- Desktop Nav – visible on md+ -->
     <div class="hidden md:flex items-center gap-8 nav-desktop">
         <a class="text-heritage-gold font-bold border-b-2 border-heritage-gold pb-1 font-label-md text-label-md hover:bg-subtle-smoke transition-all px-2 rounded-t" href="#home">Home</a>
         <a class="text-on-surface-variant hover:text-heritage-gold transition-colors font-label-md text-label-md hover:bg-subtle-smoke transition-all px-2 py-1 rounded" href="#services">Services</a>
@@ -169,19 +183,15 @@
         <a class="text-on-surface-variant hover:text-heritage-gold transition-colors font-label-md text-label-md hover:bg-subtle-smoke transition-all px-2 py-1 rounded" href="#contact">Contact</a>
     </div>
 
-    <!-- WhatsApp button (desktop) with green theme -->
-    <a class="hidden md:flex items-center gap-2 bg-whatsapp-green text-white px-5 py-2.5 rounded-full hover:bg-opacity-90 transition-all font-label-md text-label-md shadow-md" href="https://wa.me/08035221589">
-        <span class="material-symbols-outlined text-sm">chat</span>
-        WhatsApp
+    <a class="hidden md:flex items-center gap-2 bg-whatsapp-green text-white px-5 py-2.5 rounded-full hover:opacity-90 transition-all font-label-md text-label-md shadow-md" href="https://wa.me/08035221589">
+        <span class="material-symbols-outlined text-sm">chat</span> WhatsApp
     </a>
 
-    <!-- Mobile menu button -->
     <button class="md:hidden text-deep-charcoal p-2" id="mobile-menu-btn" aria-label="menu">
         <span class="material-symbols-outlined">menu</span>
     </button>
 </nav>
 
-<!-- Mobile Menu Overlay -->
 <div class="fixed inset-0 bg-ethereal-white z-40 hidden flex-col pt-24 px-margin-mobile gap-6" id="mobile-menu">
     <a class="text-headline-lg-mobile font-headline-lg-mobile text-deep-charcoal border-b border-subtle-smoke pb-4 mobile-link" href="#home">Home</a>
     <a class="text-headline-lg-mobile font-headline-lg-mobile text-on-surface-variant border-b border-subtle-smoke pb-4 mobile-link" href="#services">Services</a>
@@ -194,7 +204,7 @@
 </div>
 
 <main>
-    <!-- HERO SECTION with full-width slider -->
+    <!-- HERO SECTION without arrows, auto slide and touch swipe -->
     <section class="relative min-h-[921px] flex items-center justify-center overflow-hidden" id="home">
         <div class="absolute inset-0 z-0 overflow-hidden">
             <div class="hero-slider-track flex h-full w-full" id="hero-slider-track">
@@ -204,7 +214,6 @@
                 <div class="hero-slide min-w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD0sBeKBgr-H-h_q1exwgYcb8_m53T6I1N_9omieF6dFVnro1e-EAASFr6vnthrFkhPXT0DUfuytIdWrjlT-y9OAtcFLSR1_YXdCK0lB1QRnPE_xCXOxXhFakUJN4E4y2ZjKnCvBHzMT4dvChYQQ4C2-8PTdfFSltNR7w8UczMro6oIYp3h6uI3XFCDkMmqipHi_ys_htOoV8JuGPhxf1vyDzhWfSr5THKA-NilN796LOj-JY7NByazag');"></div>
             </div>
             <div class="absolute inset-0 bg-deep-charcoal/55 z-10"></div>
-            <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-deep-charcoal/70 to-transparent z-10"></div>
         </div>
         
         <div class="relative z-20 text-center max-w-4xl px-margin-mobile md:px-gutter mx-auto fade-in-up">
@@ -224,23 +233,18 @@
             </div>
         </div>
 
-        <button id="prev-slide" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/20 hover:bg-heritage-gold/80 hover:text-deep-charcoal text-white flex items-center justify-center transition-all backdrop-blur-sm border border-white/30" aria-label="previous">
-            <span class="material-symbols-outlined">arrow_back</span>
-        </button>
-        <button id="next-slide" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/20 hover:bg-heritage-gold/80 hover:text-deep-charcoal text-white flex items-center justify-center transition-all backdrop-blur-sm border border-white/30" aria-label="next">
-            <span class="material-symbols-outlined">arrow_forward</span>
-        </button>
+        <!-- indicators only -->
         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2">
             <span class="w-3 h-3 rounded-full bg-heritage-gold ring-2 ring-white/50"></span>
-            <span class="w-3 h-3 rounded-full bg-white/40 hover:bg-white/80"></span>
-            <span class="w-3 h-3 rounded-full bg-white/40 hover:bg-white/80"></span>
-            <span class="w-3 h-3 rounded-full bg-white/40 hover:bg-white/80"></span>
+            <span class="w-3 h-3 rounded-full bg-white/40"></span>
+            <span class="w-3 h-3 rounded-full bg-white/40"></span>
+            <span class="w-3 h-3 rounded-full bg-white/40"></span>
         </div>
     </section>
 
-    <!-- GALLERY SECTION (pure images, no text except title) -->
-    <section class="py-[100px] px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto" id="gallery">
-        <div class="text-center mb-16 fade-in-up">
+    <!-- GALLERY SECTION with horizontal swipe and more than 4 images -->
+    <section class="py-[100px] px-0 md:px-0 max-w-none mx-0 bg-white" id="gallery">
+        <div class="text-center mb-16 px-margin-mobile md:px-margin-desktop fade-in-up">
             <div class="flex items-center justify-center gap-4 mb-4">
                 <div class="h-px bg-heritage-gold w-12"></div>
                 <span class="font-label-md text-label-md text-heritage-gold uppercase tracking-widest">Gallery</span>
@@ -248,23 +252,21 @@
             </div>
             <h2 class="font-headline-lg text-headline-lg text-deep-charcoal">Memories & Spaces</h2>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            <div class="overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-shadow h-60 md:h-80">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHjiw5fUXCeQDRLOXgUxJTBcW3tTOO4g2cWK4lDJbwjF9Vt4-I3absXVzGIb2WeQBk6jyWY49ZTRDOP6YarCHVCvJC2w5Z-363V7Lb9twMlfVujJh52dKHh8hESg1T8VZ85KTgsYXxNiv5sEPPltpxIoNsWzDL4L7kCJQjgRAkmN8fP34pNEnlX9C6sfbRVN8wY7XfOzuMHaKfUM4ic4jxgXURNb8IvO9yje8uxuSOYC9-X6RAE1C78g" alt="Floral arrangement" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-            </div>
-            <div class="overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-shadow h-60 md:h-80">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrvj6lGcridLICEUoM0ZqkWnw9_3T3LzsyMzaXSrhmgtGFZ8bqwWUauW8M7lBWZp9AQ4xDcOdt9va9-ZplqgifR60hF_XhgIseLoqvy7_ADRjXFiK6N2fYzB9KC9zTWLbvYckdCCaLRGTZyFxvOeM8ivelPBQNwJvBq_o5G0AJJZBsCRndR52jaSPiX0aKDwYENJw6Zr9mUbwaNDEFqsfqF6kPNIHI-mF3CTIlbcd2HF-VSxW8sP6QPQ" alt="Procession service" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-            </div>
-            <div class="overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-shadow h-60 md:h-80">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0sBeKBgr-H-h_q1exwgYcb8_m53T6I1N_9omieF6dFVnro1e-EAASFr6vnthrFkhPXT0DUfuytIdWrjlT-y9OAtcFLSR1_YXdCK0lB1QRnPE_xCXOxXhFakUJN4E4y2ZjKnCvBHzMT4dvChYQQ4C2-8PTdfFSltNR7w8UczMro6oIYp3h6uI3XFCDkMmqipHi_ys_htOoV8JuGPhxf1vyDzhWfSr5THKA-NilN796LOj-JY7NByazag" alt="Premium casket" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-            </div>
-            <div class="overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-shadow h-60 md:h-80">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk3_eXQDqzTazveUibc0AqHe5phBGsToxw-MIWywjyHjB0h64aMpkATA_s9dT1a2pyH5Y93TZTE4VtEfMqhnRMFPstLZ99DW5k_JHOp4BT4ZzLGBaEhMa8K1ZCEH8ZNVRfRsP1k4hUQqve6HBJMZVyrzJByjP5oXcOWTuUt0h-OImGPP8ZJZAewqn2NLEZXFI_0RtwfEd5Zo4HJQ9rugS1I8d1OQ9a4Glq7rdRsnlakCclq20acWb10Q" alt="Memorial setup" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-            </div>
+        
+        <!-- horizontal scrollable gallery (left-right swipe) with more than 4 images -->
+        <div class="gallery-horizontal flex overflow-x-auto gap-4 md:gap-6 pb-6 px-margin-mobile md:px-margin-desktop snap-x snap-mandatory" id="gallery-horizontal">
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHjiw5fUXCeQDRLOXgUxJTBcW3tTOO4g2cWK4lDJbwjF9Vt4-I3absXVzGIb2WeQBk6jyWY49ZTRDOP6YarCHVCvJC2w5Z-363V7Lb9twMlfVujJh52dKHh8hESg1T8VZ85KTgsYXxNiv5sEPPltpxIoNsWzDL4L7kCJQjgRAkmN8fP34pNEnlX9C6sfbRVN8wY7XfOzuMHaKfUM4ic4jxgXURNb8IvO9yje8uxuSOYC9-X6RAE1C78g" alt="Floral arrangement" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrvj6lGcridLICEUoM0ZqkWnw9_3T3LzsyMzaXSrhmgtGFZ8bqwWUauW8M7lBWZp9AQ4xDcOdt9va9-ZplqgifR60hF_XhgIseLoqvy7_ADRjXFiK6N2fYzB9KC9zTWLbvYckdCCaLRGTZyFxvOeM8ivelPBQNwJvBq_o5G0AJJZBsCRndR52jaSPiX0aKDwYENJw6Zr9mUbwaNDEFqsfqF6kPNIHI-mF3CTIlbcd2HF-VSxW8sP6QPQ" alt="Procession service" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0sBeKBgr-H-h_q1exwgYcb8_m53T6I1N_9omieF6dFVnro1e-EAASFr6vnthrFkhPXT0DUfuytIdWrjlT-y9OAtcFLSR1_YXdCK0lB1QRnPE_xCXOxXhFakUJN4E4y2ZjKnCvBHzMT4dvChYQQ4C2-8PTdfFSltNR7w8UczMro6oIYp3h6uI3XFCDkMmqipHi_ys_htOoV8JuGPhxf1vyDzhWfSr5THKA-NilN796LOj-JY7NByazag" alt="Premium casket" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk3_eXQDqzTazveUibc0AqHe5phBGsToxw-MIWywjyHjB0h64aMpkATA_s9dT1a2pyH5Y93TZTE4VtEfMqhnRMFPstLZ99DW5k_JHOp4BT4ZzLGBaEhMa8K1ZCEH8ZNVRfRsP1k4hUQqve6HBJMZVyrzJByjP5oXcOWTuUt0h-OImGPP8ZJZAewqn2NLEZXFI_0RtwfEd5Zo4HJQ9rugS1I8d1OQ9a4Glq7rdRsnlakCclq20acWb10Q" alt="Memorial setup" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAf4Ji_17ZXlTNwiFsBMd1tQHryTbtyOTQ9AGcXkZZq0h-7GVujUvUdxn2OJwWQIj-Yk7Jmz4thsfA7CInikJ5lzHJdHvUGLzqMwpWzTFKeWQJUxuMoWhxG-PSjWQTFIf5okwiew9ucLPvajwnfhq8YPsUS_KTTOspzPAmqeoxiE_bXTdy4HVJ3TpADi52NMJc3Vrwewa234DxdM1XyYTDIfgIuyR2q2H3dNawr9o6Qr_EqbC2wWSEMw" alt="Elegant space" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <!-- extra images for swipe -->
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcr86ACou_CzzKQueeZ7bJ-BT0FjSCxTEqUIX2FJDhKPDk5ReZzuBYSiBp2DfHi0qiKwzwRgiFDDqJNur0wWz5hh6pskijj3lHmBO9liQwelZ6vhXskZ49jbrUBV1Kzqw9S3M-mEgf3ZpuMMgnZgdiQEsmONHXwJtp_wSKMWEp4l8-BFiCXAwAyLkWEPjNGsR9eJ9qGN9A-YZcVidsgTxIoJAc7oucRm50vlq5lNtffvRibYbIfVjKTQ" alt="Service room" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEFVJv4Ls8YtKi7Q4Fdm-FsYBgCF7NRfoVQANOkZansBPT-naNdoJzSIw8NgzS5JbqzeaSgifpb-j5dnxJo55jHTa38XgrvJOIeGheB2O_GYwBhNmKvAJ6SWeNFrXXKQCdW7uM11bBW6EwT_gHQtOSlGinGrhAS5xWKxWQF0iqCVptAOPMpTQpCTdFLIOyltGCR04aMoHJkMhISB9V7BsaKgIR8sX5ngbG3uSjuZp1Ym2qDgC-OA-xCw" alt="Memorial hall" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
         </div>
     </section>
 
-    <!-- SERVICES SECTION -->
+    <!-- SERVICES SECTION (unchanged) -->
     <section class="py-[100px] px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto bg-surface-bright" id="services">
         <div class="text-center mb-16 fade-in-up">
             <div class="flex items-center justify-center gap-4 mb-4">
@@ -290,7 +292,7 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
+    <!-- TESTIMONIALS & CONTACT unchanged for brevity but present -->
     <section class="py-[100px] px-margin-mobile md:px-margin-desktop bg-deep-charcoal text-ethereal-white">
         <div class="max-w-container-max mx-auto">
             <div class="text-center mb-16 fade-in-up"><span class="material-symbols-outlined text-4xl text-heritage-gold mb-4">format_quote</span><h2 class="font-headline-lg text-headline-lg mb-4">Words from Families</h2></div>
@@ -302,7 +304,6 @@
         </div>
     </section>
 
-    <!-- CONTACT -->
     <section class="py-[100px] px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto" id="contact">
         <div class="grid md:grid-cols-2 gap-12 items-center fade-in-up">
             <div>
@@ -370,16 +371,14 @@
         if (menuBtn) menuBtn.querySelector('.material-symbols-outlined').textContent = 'menu';
     }));
 
-    // Hero slider
+    // Hero slider (auto only, no arrows, touch swipe)
     const heroTrack = document.getElementById('hero-slider-track');
     const heroSlides = document.querySelectorAll('.hero-slide');
     let heroIndex = 0;
     const heroTotal = heroSlides.length;
     function updateHero() { if (heroTrack) heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`; }
-    document.getElementById('next-slide')?.addEventListener('click', () => { heroIndex = (heroIndex+1) % heroTotal; updateHero(); });
-    document.getElementById('prev-slide')?.addEventListener('click', () => { heroIndex = (heroIndex-1+heroTotal) % heroTotal; updateHero(); });
     setInterval(() => { heroIndex = (heroIndex+1) % heroTotal; updateHero(); }, 5000);
-    // Touch for hero
+    // Touch swipe for hero (no arrows)
     let touchStartX = 0;
     document.getElementById('home')?.addEventListener('touchstart', (e) => touchStartX = e.changedTouches[0].screenX);
     document.getElementById('home')?.addEventListener('touchend', (e) => {
@@ -390,6 +389,8 @@
             updateHero();
         }
     });
+
+    // Gallery horizontal already works with native scroll/swipe, no extra JS needed.
 </script>
 </body>
 </html>
