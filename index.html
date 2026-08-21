@@ -310,6 +310,15 @@
             <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="funrl2.jpg" alt="Funeral service 10" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
             <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="funrl4.jpg" alt="Funeral service 11" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
             <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="funrl6.jpg" alt="Funeral service 12" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="hhr1.jpeg" alt="Funeral service 9" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="hhr2.jpeg" alt="Funeral service 10" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="hhr3.jpeg" alt="Funeral service 11" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="hhr4.jpeg" alt="Funeral service 12" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="hhr5.jpeg" alt="Funeral service 12" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="hhr6.jpeg" alt="Funeral service 9" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="hhr7.jpeg" alt="Funeral service 10" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="hhr8.jpeg" alt="Funeral service 11" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+            <div class="snap-center shrink-0 w-72 md:w-96 h-72 md:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"><img src="hhr9.jpeg" alt="Funeral service 12" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
         </div>
     </section>
 
@@ -512,29 +521,46 @@
     });
 
     // Service Modal Functionality
-    function openServiceModal(serviceName) {
-        const modal = document.getElementById('serviceModal');
-        const modalTitle = document.getElementById('serviceModalTitle');
-        const modalGallery = document.getElementById('serviceModalGallery');
-        
-        modalTitle.textContent = serviceName;
-        
-        // Clear previous gallery content
-        modalGallery.innerHTML = '';
-        
-        // Add images based on service
-        const images = ['funrl1.jpg', 'funrl2.jpg', 'funrl3.jpg', 'funrl4.jpg', 'funrl5.jpg', 'funrl6.jpg'];
-        
-        images.forEach((img, index) => {
-            const imageDiv = document.createElement('div');
-            imageDiv.className = 'snap-center shrink-0 w-64 h-64 rounded-xl overflow-hidden';
-            imageDiv.innerHTML = `<img src="${img}" alt="${serviceName} image ${index+1}" class="w-full h-full object-cover">`;
-            modalGallery.appendChild(imageDiv);
-        });
-        
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
+// Service Modal Functionality - Updated with individual service images
+function openServiceModal(serviceName) {
+    const modal = document.getElementById('serviceModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalGallery = document.getElementById('serviceModalGallery');
+    
+    modalTitle.textContent = serviceName;
+    
+    // Clear previous gallery content
+    modalGallery.innerHTML = '';
+    
+    // Define images for each service
+    const serviceImages = {
+        'Casket Services': ['funrl1.jpg', 'funrl2.jpg', 'funrl3.jpg'],
+        'Pall Bearers': ['funrl4.jpg', 'funrl5.jpg', 'funrl6.jpg'],
+        'Brass Band': ['hhr1.jpeg', 'hhr2.jpeg', 'hhr3.jpeg'],
+        'Wreath Girls': ['hhr4.jpeg', 'hhr5.jpeg', 'hhr6.jpeg'],
+        'Lying-In-State': ['hhr7.jpeg', 'hhr8.jpeg', 'hhr9.jpeg'],
+        'Event Decorations': ['funrl1.jpg', 'funrl3.jpg', 'funrl5.jpg'],
+        'Lowering Devices': ['funrl2.jpg', 'funrl4.jpg', 'funrl6.jpg'],
+        'Rugs & Tents': ['hhr1.jpeg', 'hhr3.jpeg', 'hhr5.jpeg'],
+        'Mortuary Services': ['hhr2.jpeg', 'hhr4.jpeg', 'hhr6.jpeg'],
+        'Embalming': ['hhr7.jpeg', 'hhr9.jpeg', 'funrl1.jpg'],
+        'Vault Services': ['funrl3.jpg', 'hhr2.jpeg', 'hhr8.jpeg'],
+        'Floral Wreaths': ['hhr4.jpeg', 'funrl5.jpg', 'hhr7.jpeg']
+    };
+    
+    // Get images for the selected service (fallback to default if not found)
+    const images = serviceImages[serviceName] || ['funrl1.jpg', 'funrl2.jpg', 'funrl3.jpg'];
+    
+    images.forEach((img, index) => {
+        const imageDiv = document.createElement('div');
+        imageDiv.className = 'snap-center shrink-0 w-64 h-64 rounded-xl overflow-hidden';
+        imageDiv.innerHTML = `<img src="${img}" alt="${serviceName} image ${index+1}" class="w-full h-full object-cover">`;
+        modalGallery.appendChild(imageDiv);
+    });
+    
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
 
     function closeServiceModal() {
         const modal = document.getElementById('serviceModal');
